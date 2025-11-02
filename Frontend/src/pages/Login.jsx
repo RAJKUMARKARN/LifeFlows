@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Login() {
   return (
     <div className="flex w-full h-screen">
@@ -87,6 +89,12 @@ export default function Login() {
               <span className="text-sm font-medium">Facebook</span>
             </button>
           </div>
+          <p className="text-center text-xs text-[#737373] mt-5">
+            Dont have an account?{" "}
+            <Link to="/signup" className="text-[#BD1519] font-bold">
+                Sign In
+            </Link>
+            </p>
         </form>
       </div>
     </div>
