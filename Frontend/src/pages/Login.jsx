@@ -4,7 +4,7 @@ export default function Login() {
       {/* Left Section (Image) */}
       <div className="w-[65%] h-full bg-black">
         <img
-          src="/leftSection.png"
+          src="/leftsec3.png"
           alt="Blood donation"
           className="w-full h-full object-cover"
         />
