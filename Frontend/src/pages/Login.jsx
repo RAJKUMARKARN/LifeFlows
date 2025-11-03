@@ -1,30 +1,66 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Login() {
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      // 🔹 Send login request to backend
+      const response = await axios.post("http://localhost:5000/api/auth/login", {
+        email: formData.email,
+        password: formData.password,
+      });
+
+      // 🔹 Save JWT token to localStorage
+      localStorage.setItem("token", response.data.token);
+
+      console.log("✅ Login successful:", response.data);
+
+      // 🔹 Redirect to Dashboard
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("❌ Login failed:", error.response?.data || error.message);
+      alert(error.response?.data?.message || "Invalid credentials");
+    }
+  };
+
   return (
     <div className="flex w-full h-screen">
-      {/* Left Section (Image) */}
+      {/* Left Section */}
       <div className="w-[65%] h-full bg-black">
-        <img
-          src="/leftsec3.png"
-          alt="Blood donation"
-          className="w-full h-full object-cover"
-        />
+        <video
+          src="/leftsec3.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-contain"
+        ></video>
       </div>
 
-      {/* Right Section (Form or content) */}
+      {/* Right Section */}
       <div className="w-[35%] h-full bg-white flex flex-col items-center justify-center text-black">
-        
         {/* Branding */}
-        <div id="Branding" className="flex h-[55px] w-[200px]">
+        <div className="flex h-[55px] w-[200px]">
           <img src="/logo2.png" alt="Logo" className="w-full h-full object-contain" />
         </div>
 
         {/* Welcome Section */}
-        <div
-          id="Welcome"
-          className="flex flex-col items-center justify-center mt-[5%] font-bold"
-        >
+        <div className="flex flex-col items-center justify-center mt-[5%] font-bold">
           <h1 className="text-[60px]">Welcome</h1>
           <p className="text-[#9A9A9A] text-[17px] font-normal">
             Sign in to save your Life-saving journey
@@ -32,25 +68,33 @@ export default function Login() {
         </div>
 
         {/* Login Form */}
-        <form action="POST" className="flex flex-col mt-[5%]">
+        <form onSubmit={handleSubmit} className="flex flex-col mt-[5%]">
           <h3 className="font-medium">Email</h3>
           <input
+            name="email"
             type="email"
             placeholder="yourmail@example.com"
-            className="rounded-md font-medium text-[#848484] bg-[#EFECEC] p-2 mb-4"
+            value={formData.email}
+            onChange={handleChange}
+            className="rounded-md font-medium text-[#848484] bg-[#EFECEC] p-2 mb-4 w-[380px]"
+            required
           />
 
           <h3 className="font-medium">Password</h3>
           <input
+            name="password"
             type="password"
             placeholder="Password"
-            className="w-[380px] rounded-md font-medium text-[#848484] bg-[#EFECEC] p-2 mb-4"
+            value={formData.password}
+            onChange={handleChange}
+            className="rounded-md font-medium text-[#848484] bg-[#EFECEC] p-2 mb-4 w-[380px]"
+            required
           />
 
           {/* Remember Me + Forgot Password */}
           <div className="flex items-center justify-between mb-4 text-sm">
             <label className="flex items-center space-x-2">
-              <input type="checkbox" className="accent-blue-500 w-4 h-4" />
+              <input type="checkbox" className="accent-[#BD1519] w-4 h-4 cursor-pointer" />
               <span className="text-[#737373] font-medium">Remember me</span>
             </label>
             <a href="#" className="text-[#BD1519] font-bold">
@@ -77,24 +121,30 @@ export default function Login() {
 
           {/* Social Buttons */}
           <div className="flex justify-center gap-4 mt-4">
-            {/* Google Button */}
-            <button className="flex items-center justify-center gap-2 w-[180px] py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-100 transition">
+            <button
+              type="button"
+              className="flex items-center justify-center gap-2 w-[180px] py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-100 transition"
+            >
               <img src="/google.png" alt="Google" className="w-5 h-5" />
               <span className="text-sm font-medium">Google</span>
             </button>
 
-            {/* Facebook Button */}
-            <button className="flex items-center justify-center gap-2 w-[180px] h-[50px] py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-100 transition">
+            <button
+              type="button"
+              className="flex items-center justify-center gap-2 w-[180px] py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-100 transition"
+            >
               <img src="/facebook.png" alt="Facebook" className="w-5 h-5" />
               <span className="text-sm font-medium">Facebook</span>
             </button>
           </div>
+
+          {/* Signup Redirect */}
           <p className="text-center text-xs text-[#737373] mt-5">
-            Dont have an account?{" "}
+            Don’t have an account?{" "}
             <Link to="/signup" className="text-[#BD1519] font-bold">
-                Sign In
+              Sign Up
             </Link>
-            </p>
+          </p>
         </form>
       </div>
     </div>

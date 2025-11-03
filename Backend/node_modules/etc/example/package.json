@@ -1,0 +1,16 @@
+{
+  "name": "etc-example",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Etc example",
+  "main": "example.js",
+  "dependencies": {
+    "etc": "*"
+  },
+  "etc": {
+    "db": {
+      "host": "localhost",
+      "port": 3000
+    }
+  }
+}

@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-
+import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 
 export default function SignUp() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,21 +20,42 @@ export default function SignUp() {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
 
-    if (!formData.agree) {
-      alert("Please agree to the Terms & Privacy Policy.");
-      return;
-    }
+  //this is the handle submit function
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
-      return;
-    }
+  if (!formData.agree) {
+    alert("Please agree to the Terms & Privacy Policy.");
+    return;
+  }
 
-    console.log("Sign-up data:", formData);
-  };
+  if (formData.password !== formData.confirmPassword) {
+    alert("Passwords do not match!");
+    return;
+  }
+
+  try {
+    const response = await axios.post("http://localhost:5000/api/auth/register", {
+      name: formData.name,
+      email: formData.email,
+      password: formData.password,
+    });
+
+    // ✅ Save token from backend
+    localStorage.setItem("token", response.data.token);
+
+    console.log("Signup successful:", response.data);
+
+    // ✅ Redirect to dashboard
+    navigate("/dashboard");
+  } catch (error) {
+    console.error("Signup failed:", error.response?.data || error.message);
+    alert(error.response?.data?.message || "Signup failed. Try again!");
+  }
+};
+
+
 
   const handleGoogleSignIn = () => console.log("Google Sign-In clicked");
   const handleFacebookSignIn = () => console.log("Facebook Sign-In clicked");
@@ -42,11 +64,14 @@ export default function SignUp() {
     <div className="flex w-full h-screen">
       {/* Left Section */}
       <div className="w-[65%] h-full bg-black">
-        <img
-          src="/leftsec3.png"
-          alt="Blood donation"
-          className="w-full h-full object-cover"
-        />
+        <video
+          src="/leftsec3.mp4"   // replace with your video file path
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-contain"
+        ></video>
       </div>
 
       {/* Right Section */}
