@@ -37,3 +37,32 @@ The app is designed with a clean UI, modern animations, and a secure backend.
 
 ## 🧩 Project Structure
 
+LifeFlows/
+├── backend/
+│ ├── config/
+│ │ └── db.js # MongoDB connection setup
+│ ├── controllers/
+│ │ └── authController.js # Register/Login logic
+│ ├── models/
+│ │ └── User.js # User schema
+│ ├── routes/
+│ │ └── authRoutes.js # Auth routes
+│ ├── .env # Environment variables
+│ ├── package.json
+│ └── server.js # Main server entry point
+│
+├── frontend/
+│ ├── src/
+│ │ ├── pages/
+│ │ │ ├── Login.jsx
+│ │ │ ├── SignUp.jsx
+│ │ │ └── Dashboard.jsx
+│ │ ├── App.jsx
+│ │ └── main.jsx
+│ ├── public/
+│ ├── package.json
+│ └── vite.config.js
+│
+└── README.md
+
+
