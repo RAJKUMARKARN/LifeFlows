@@ -27,7 +27,7 @@ export const register = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
-
+//this is the login controller
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
