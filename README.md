@@ -1,5 +1,6 @@
 # 🩸 LifeFlows – Blood Donation Platform
 
+Hey there,
 **LifeFlows** is a full-stack blood donation management system built to connect donors and recipients efficiently.  
 It allows users to register, log in securely using JWT authentication, and manage their life-saving journeys.  
 The app is designed with a clean UI, modern animations, and a secure backend.
@@ -64,5 +65,6 @@ LifeFlows/
 │ └── vite.config.js
 │
 └── README.md
+
 
 
