@@ -50,7 +50,7 @@ LifeFlows/
 │ │ └── authRoutes.js # Auth routes
 │ ├── .env # Environment variables
 │ ├── package.json
-│ └── server.js # Main server entry point
+│ └── server.js
 │
 ├── frontend/
 │ ├── src/
