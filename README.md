@@ -61,9 +61,6 @@ LifeFlows/
 │ │ ├── App.jsx
 │ │ └── main.jsx
 │ ├── public/
-│ ├── package.json
-│ └── vite.config.js
-│
 
 
 
