@@ -1,8 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { GoogleLogin } from "@react-oauth/google"; // ✅ Add this
+import { jwtDecode } from "jwt-decode"; // ✅ Add this
 import axios from "axios";
 
 export default function Login() {
+ const videoRef = useRef(null); // ✅ Declare ref here
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.load();
+      video.play().catch((err) => {
+        console.log("Autoplay blocked:", err);
+      });
+    }
+  }, []);
+
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -43,12 +57,13 @@ export default function Login() {
       {/* Left Section */}
       <div className="w-[65%] h-full bg-black">
         <video
-          src="/leftsec3.mp4"
+        ref = {videoRef}
+          src="/LifeFlows.mp4"
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-full object-contain"
+          className="w-full h-full object-cover"
         ></video>
       </div>
 
@@ -121,13 +136,28 @@ export default function Login() {
 
           {/* Social Buttons */}
           <div className="flex justify-center gap-4 mt-4">
-            <button
-              type="button"
-              className="flex items-center justify-center gap-2 w-[180px] py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-100 transition"
-            >
-              <img src="/google.png" alt="Google" className="w-5 h-5" />
-              <span className="text-sm font-medium">Google</span>
-            </button>
+            <GoogleLogin
+            onSuccess={async (credentialResponse) => {
+              try {
+                const token = credentialResponse.credential;
+                const userInfo = jwtDecode(token);
+                console.log("✅ Google User Info:", userInfo);
+
+                // Send token to backend for verification
+                const res = await axios.post("http://localhost:5000/api/auth/google", { token });
+
+                // Save JWT and redirect
+                localStorage.setItem("token", res.data.token);
+                navigate("/dashboard");
+              } catch (error) {
+                console.error("❌ Google Login Failed:", error.response?.data || error.message);
+                alert("Google login failed. Please try again.");
+              }
+            }}
+            onError={() => {
+              console.error("Google Login Failed");
+            }}
+          />
 
             <button
               type="button"

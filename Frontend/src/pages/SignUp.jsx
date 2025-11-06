@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 
 export default function SignUp() {
@@ -170,14 +172,28 @@ export default function SignUp() {
 
           {/* Social Buttons */}
           <div className="flex justify-center gap-3 mt-2">
-            <button
-              type="button"
-              onClick={handleGoogleSignIn}
-              className="flex items-center justify-center gap-2 w-[140px] py-1.5 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-100 transition"
-            >
-              <img src="/google.png" alt="Google" className="w-4 h-4" />
-              <span className="text-xs font-medium">Google</span>
-            </button>
+            <GoogleLogin
+              onSuccess={async (credentialResponse) => {
+                try {
+                  const token = credentialResponse.credential;
+                  const userInfo = jwtDecode(token);
+                  console.log("✅ Google User Info:", userInfo);
+
+                  // Send token to backend for verification
+                  const res = await axios.post("http://localhost:5000/api/auth/google", { token });
+
+                  // Save JWT and redirect
+                  localStorage.setItem("token", res.data.token);
+                  navigate("/dashboard");
+                } catch (error) {
+                  console.error("❌ Google Sign-Up Failed:", error.response?.data || error.message);
+                  alert("Google sign-up failed. Please try again.");
+                }
+              }}
+              onError={() => {
+                console.error("Google Sign-Up Failed");
+              }}
+            />
 
             <button
               type="button"
