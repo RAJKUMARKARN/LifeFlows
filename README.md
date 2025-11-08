@@ -61,7 +61,7 @@ LifeFlows/
 │ │ ├── App.jsx
 │ │ └── main.jsx
 │ ├── public/
-   some more folders are yet to be added
+   
 
 
 
