@@ -10,18 +10,18 @@ const menuItems = [
 ];
 
 export default function Sidebar({ children }) {
-  const [isOpen, setIsOpen] = useState(true);
-  const location = useLocation(); // Get current route
+  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
   return (
-    <div className="flex h-screen">
+    <div className="flex">
       {/* Sidebar */}
       <div
-        className={`bg-gradient-to-b from-[#F2335A] to-[#CD1E2D] text-white flex flex-col transition-all duration-300 ${
+        className={`bg-gradient-to-b from-[#ee0979] to-[#ff6a00] text-white flex flex-col transition-width duration-300 h-screen fixed top-0 left-0 ${
           isOpen ? "w-64" : "w-12"
         }`}
       >
-        <div className="flex items-center justify-end p-4">
+        <div className="flex items-center justify-end p-4 mt-[10px]">
           <button onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <HiX size={24} /> : <HiMenu size={24} />}
           </button>
@@ -29,13 +29,13 @@ export default function Sidebar({ children }) {
 
         <nav className="mt-4 flex-1">
           {menuItems.map((item) => {
-            const isActive = location.pathname === item.path; // check if current route
+            const isActive = location.pathname === item.path;
             return (
               <Link
                 key={item.name}
                 to={item.path}
-                className={`flex items-center p-4 hover:bg-[#BF2935]  transition-colors duration-200 ${
-                  isActive ? "bg-[#6E141B] " : ""
+                className={`flex items-center p-4 hover:bg-[#BF2935] transition-colors duration-200 ${
+                  isActive ? "bg-[#6E141B]" : ""
                 }`}
               >
                 <span className="text-lg">{item.icon}</span>
@@ -46,8 +46,14 @@ export default function Sidebar({ children }) {
         </nav>
       </div>
 
-      {/* Main Content */}
-      <div className="transition-all duration-300 flex-1 p-6">{children}</div>
+      {/* Main content */}
+      <div
+        className={`transition-all duration-300 flex-1 p-6 ${
+          isOpen ? "ml-64" : "ml-12"
+        } overflow-auto h-screen`}
+      >
+        {children}
+      </div>
     </div>
   );
 }
