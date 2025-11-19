@@ -1,6 +1,9 @@
 import Sidebar from "../Components/Sidebar";
+import Footer from "../Components/Footer";
+
 
 export default function Dashboard() {
+
   function useFadeUpAnimation() {
   useEffect(() => {
     const elements = document.querySelectorAll(".fade-up-on-scroll");
@@ -48,6 +51,7 @@ export default function Dashboard() {
   ];
 
   return (
+     
     <Sidebar>
       {/* Inject animation styles here so no global file needed */}
       <style>{`
@@ -67,9 +71,9 @@ export default function Dashboard() {
       <div className="flex-1 flex flex-col w-full">
         {/* Logo and title */}
         <div className="transition-all duration-300 flex ml-4 mt-4">
-          <img src="/logo.png" alt="" className="w-[45px] h-[45px]" />
-          <div className="leading-tight flex flex-col justify-center ml-[5px] p-[5px]">
-            <h1 className="text-[28px] font-bold mb-1">Life Flows</h1>
+          <img src="/logo.png" alt="" className="w-[45px] mt-[2px] h-[45px]" />
+          <div className="leading-tight flex flex-col justify-center ml-[5px]">
+            <h1 className="text-[28px] font-bold ">Life Flows</h1>
             <p className="text-[15px] font-medium text-[#969696]">Together we flow</p>
           </div>
         </div>
@@ -81,7 +85,7 @@ export default function Dashboard() {
             alt=""
             className="absolute top-0 left-0 w-full h-full object-cover"
           />
-          <div className="absolute top-0 left-0 w-full h-full bg-black/50"></div>
+          
 
           <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4 z-10">
             <h1 className="text-[60px] font-bold bg-white bg-clip-text text-transparent drop-shadow-lg">
@@ -111,21 +115,21 @@ export default function Dashboard() {
 
         {/* SECOND SECTION */}
         <div
-          className="flex flex-col md:flex-row justify-center items-center mt-[70px] mb-[70px] px-6 animate-fadeUp"
+          className="flex flex-col fade-up-on-scroll md:flex-row justify-center items-center mt-[50px] px-6 p-[20px] animate-fadeUp"
           style={{ animationDelay: "0.05s" }}
         >
           <div className="w-full md:w-1/2 flex justify-center items-center mb-6 md:mb-0">
             <img
               src="secondSection.png"
               alt=""
-              className="h-[100%] w-[400px] rounded-[30px] grayscale hover:grayscale-0 transition-all duration-500 ease-in-out"
+              className="h-[100%] w-[400px] rounded-[30px]  transition-all duration-500 ease-in-out"
             />
           </div>
-          <div className="w-full md:w-1/2 flex flex-col">
+          <div className="w-full md:w-1/2 p=[20px] flex flex-col">
             <h1 className="font-bold bg-gradient-to-r from-[#ee0979] to-[#ff6a00] bg-clip-text text-transparent text-[35px] mb-[10px]">
               What are Blood Donation Camps ?
             </h1>
-            <p className="text-gray-500 text-[18px] leading-[30px]">
+            <p className="text-gray-500 mr-[50px] text-[18px] leading-[30px]">
               Rather than going to the hospital to donate blood, we bring the hospital to you. We
               partner with government recognized blood banks who bring their expert doctors and staff
               to conduct a clean blood donation camp without any hassles. The camp can be organized in
@@ -138,10 +142,10 @@ export default function Dashboard() {
 
         {/* THIRD SECTION */}
         <div
-          className="flex flex-col md:flex-row justify-center items-center mt-[70px] mb-[70px] px-6 animate-fadeUp"
+          className=" group flex fade-up-on-scroll flex-col md:flex-row justify-center items-center mt-[70px] mb-[70px] px-6 animate-fadeUp"
           style={{ animationDelay: "0.15s" }}
         >
-          <div className="w-full md:w-1/2 flex flex-col mb-6 md:mb-0">
+          <div className=" group w-full md:w-1/2 p-[20px] flex flex-col mb-6 md:mb-0">
             <h1 className="font-bold bg-gradient-to-r from-[#ee0979] to-[#ff6a00] bg-clip-text text-transparent text-[35px] mb-[10px]">
               How we can make them different
             </h1>
@@ -154,21 +158,21 @@ export default function Dashboard() {
             </p>
           </div>
 
-          <div className="w-full md:w-1/2 flex justify-center items-center">
+          <div className=" w-full md:w-1/2 flex justify-center items-center">
             <img
               src="thirdSection.png"
               alt=""
-              className="h-[100%] w-[400px] rounded-[30px] grayscale hover:grayscale-0 transition-all duration-500 ease-in-out"
+              className="h-[100%] w-[400px] rounded-[30px]  transition-all duration-500 ease-in-out"
             />
           </div>
         </div>
 
         {/* FOURTH SECTION - benefits */}
         <div
-          className="flex flex-col font-semibold rounded-[30px] p-[10px] mt-[50px] bg-[#F5F5F7] justify-center items-center mb-[70px] animate-fadeUp"
+          className="flex flex-col fade-up-on-scroll font-semibold rounded-[30px] p-[10px] mt-[50px] bg-[#F5F5F7] justify-center items-center mb-[30px] h-[500px] animate-fadeUp"
           style={{ animationDelay: "0.25s" }}
         >
-          <h1 className="text-[40px] text-gray-600 mt-[30px] mb-6">Benefits of Blood Donation</h1>
+          <h1 className="text-[40px] text-gray-600 mt-[10px] mb-[30px]">Benefits of Blood Donation</h1>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-[1100px] px-6">
             {benefitsData.map((benefit, i) => (
@@ -189,10 +193,10 @@ export default function Dashboard() {
 
         {/* FIFTH SECTION */}
         <div
-          className="flex flex-col w-[100%] h-[400px] p-[10px] items-center animate-fadeUp"
+          className="flex flex-col fade-up-on-scroll w-[100%] h-[400px] p-[10px] items-center animate-fadeUp"
           style={{ animationDelay: "0.9s" }}
         >
-          <h1 className="text-[60px] text-gray-600">Book an Appointment for Donation</h1>
+          <h1 className="text-[60px]  bg-gradient-to-r from-[#ee0979] to-[#ff6a00] bg-clip-text text-transparent">Book an Appointment for Donation</h1>
           <p className="text-[15px] mt-[30px] text-center text-gray-500 font-semibold max-w-[900px]">
             You are one step closer to being a superhero. Organize a blood donation camp in your
             college, office, or society and get that superman cape. We would take care of the process
@@ -205,6 +209,9 @@ export default function Dashboard() {
             Schedule Donation
           </button>
         </div>
+
+        {/* //footer section */}
+        <Footer/>
       </div>
     </Sidebar>
   );
