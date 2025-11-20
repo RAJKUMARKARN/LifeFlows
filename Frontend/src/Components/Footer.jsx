@@ -1,7 +1,8 @@
 export default function Footer() {
   return (
-    <footer className=" bg-gradient-to-r from-[#ee0979] to-[#ff6a00] text-white py-10 rounded-3xl shadow-inner">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <footer className="w-full bg-gradient-to-r from-[#ee0979] to-[#ff6a00] rounded-[30px] text-white py-12 shadow-inner">
+
+      <div className="w-full px-10 grid grid-cols-1 md:grid-cols-3 gap-8">
 
         {/* Logo + Tagline */}
         <div>
