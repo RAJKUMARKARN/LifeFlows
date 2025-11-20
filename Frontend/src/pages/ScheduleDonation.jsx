@@ -1,5 +1,6 @@
 import Sidebar from "../Components/Sidebar";
 import { useNavigate } from "react-router-dom";
+import Footer from "../Components/Footer";
 
 export default function ScheduleDonation() {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ export default function ScheduleDonation() {
         <p className="text-gray-500 mt-4">
           This is the schedule donation page.
         </p>
+        <Footer/>
       </div>
     </Sidebar>
   );

@@ -100,7 +100,7 @@ export default function Dashboard() {
               What are Blood Donation Camps?
             </h1>
             <p className="text-gray-500 leading-[30px]">
-              We bring expert doctors and staff directly to communities...
+              Rather than going to the hospital to donate blood, we bring the hospital to you. We partner with government recognized blood banks who bring their expert doctors and staff to conduct a clean blood donation camp without any hassles. The camp can be organized in a common area or in a blood donation bus which we can bring. We make all the other arrangements, you just have to provide a ventilated clean area.Now saving lives does not need any travel even, just 20minutes at the camp!
             </p>
           </div>
         </div>
@@ -112,7 +112,7 @@ export default function Dashboard() {
               How we make them different
             </h1>
             <p className="text-gray-500 leading-[30px]">
-              We ensure every donor feels special with music, themes, and motivation...
+              We do not just help you organize a camp, but we also try to ensure each donor feels special. A blood donation camp can be fun with music, it can have a theme, it can motivate people for greater things. We help you do that, right from motivating people before the camp to ensuring each donor feels a sense of pride and happiness post donation.
             </p>
           </div>
 
@@ -147,7 +147,7 @@ export default function Dashboard() {
             Organize a blood donation camp in your college, office, or society!
           </p>
 
-          <button className="mt-[25px] bg-gray-700 text-white px-6 py-3 rounded-[50px] shadow-lg hover:bg-[#d52d52] transition-all">
+          <button onClick={() => navigate("/schedule-donation")} className="mt-[25px] mb-[30px] bg-gray-700 text-white px-6 py-3 rounded-[50px] shadow-lg hover:bg-[#d52d52] transition-all">
             Schedule Donation
           </button>
         </div>
