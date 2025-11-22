@@ -58,7 +58,16 @@ export default function RequestBlood() {
 
   return (
     <Sidebar>
-      <div className="p-10 w-full flex flex-col  items-center mb-[50px]">
+      {/* MAIN CONTAINER — FULL HEIGHT FLEXBOX */}
+      <div className="min-h-screen flex flex-col p-10 w-full items-center">
+
+        <div className="transition-all duration-300 flex ml-4 mt-4 mb-6">
+          <img src="/logo.png" alt="" className="w-[48px] mt-[2px] h-[48px]" />
+          <div className="leading-tight flex flex-col justify-center ml-[5px]">
+            <h1 className="text-[28px] font-bold">Life Flows</h1>
+            <p className="text-[12px] font-medium text-[#969696]">Together we flow</p>
+          </div>
+        </div>
 
         {/* Page Title */}
         <h1 className="text-[40px] font-bold bg-gradient-to-r from-[#ee0979] to-[#ff6a00] bg-clip-text text-transparent">
@@ -80,13 +89,13 @@ export default function RequestBlood() {
 
           <form
             onSubmit={handleSubmit}
-            className="grid grid-cols-1 md:grid-cols-2   mb-[30px] gap-6"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-[30px]"
           >
 
             {/* Patient Name */}
             <div>
               <label className="font-semibold text-gray-700">Patient Name</label>
-              <div className="flex rounded-md font-medium text-[#848484] focus:bg-white bg-[#EFECEC] p-2 mb-4p-3 mt-1">
+              <div className="flex rounded-md bg-[#EFECEC] p-2 mt-1 text-[#848484]">
                 <FiUser className="text-gray-500 mr-3" />
                 <input
                   type="text"
@@ -103,7 +112,7 @@ export default function RequestBlood() {
             {/* Hospital Name */}
             <div>
               <label className="font-semibold text-gray-700">Hospital Name</label>
-              <div className="flex rounded-md font-medium text-[#848484] focus:bg-white bg-[#EFECEC] p-2 mb-4p-3 mt-1">
+              <div className="flex rounded-md bg-[#EFECEC] p-2 mt-1 text-[#848484]">
                 <FiHome className="text-gray-500 mr-3" />
                 <input
                   type="text"
@@ -120,7 +129,7 @@ export default function RequestBlood() {
             {/* Blood group */}
             <div>
               <label className="font-semibold text-gray-700">Blood Group</label>
-              <div className="flex rounded-md font-medium text-[#848484] focus:bg-white bg-[#EFECEC] p-2 mb-4p-3 ">
+              <div className="flex rounded-md bg-[#EFECEC] p-2 text-[#848484]">
                 <FiDroplet className="text-red-500 mr-3" />
                 <select
                   name="bloodGroup"
@@ -147,7 +156,7 @@ export default function RequestBlood() {
                 value={formData.units}
                 onChange={handleChange}
                 placeholder="Ex: 2"
-                className="flex rounded-md font-medium text-[#848484] focus:bg-white bg-[#EFECEC] p-2 mb-4p-3 mt-1"
+                className="flex rounded-md bg-[#EFECEC] p-2 mt-1 text-[#848484] outline-none"
                 required
               />
             </div>
@@ -155,7 +164,7 @@ export default function RequestBlood() {
             {/* City */}
             <div>
               <label className="font-semibold text-gray-700">City</label>
-              <div className="flex rounded-md font-medium text-[#848484] focus:bg-white bg-[#EFECEC] p-2 mb-4p-3 mt-1">
+              <div className="flex rounded-md bg-[#EFECEC] p-2 mt-1 text-[#848484]">
                 <FiMapPin className="text-gray-500 mr-3" />
                 <input
                   type="text"
@@ -172,7 +181,7 @@ export default function RequestBlood() {
             {/* Contact Number */}
             <div>
               <label className="font-semibold text-gray-700">Contact Number</label>
-              <div className="flex rounded-md font-medium text-[#848484] focus:bg-white bg-[#EFECEC] p-2 mb-4p-3 mt-1">
+              <div className="flex rounded-md bg-[#EFECEC] p-2 mt-1 text-[#848484]">
                 <FiPhone className="text-gray-500 mr-3" />
                 <input
                   type="text"
@@ -191,7 +200,7 @@ export default function RequestBlood() {
               <label className="font-semibold text-gray-700">
                 Additional Notes (Optional)
               </label>
-              <div className="flex rounded-md font-medium text-[#848484] focus:bg-white bg-[#EFECEC] p-2 mb-4p-3 mt-1">
+              <div className="flex rounded-md bg-[#EFECEC] p-2 mt-1 text-[#848484]">
                 <FiInfo className="text-gray-500 mr-3 mt-1" />
                 <textarea
                   name="notes"
@@ -217,9 +226,11 @@ export default function RequestBlood() {
           </form>
         </div>
 
-        <div className="w-full mt-10">
-      <Footer />
-    </div>
+        {/* FOOTER STICKS TO BOTTOM */}
+        <div className="w-full mt-[50px]">
+          <Footer />
+        </div>
+
       </div>
     </Sidebar>
   );
