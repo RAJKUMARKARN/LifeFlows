@@ -6,6 +6,7 @@ import authRoutes from "./routes/authRoutes.js"; // optional if you want separat
 import jwt from "jsonwebtoken";
 import axios from "axios";
 import { OAuth2Client } from "google-auth-library";
+import bloodRequestRoutes from "./routes/bloodRequestRoutes.js";
 
 dotenv.config();
 connectDB();
@@ -19,7 +20,7 @@ const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 // Routes
 app.use("/api/auth", authRoutes); // keeps your existing routes
-
+app.use("/api/bloodreq", bloodRequestRoutes);
 // Root route
 app.get("/", (req, res) => {
   res.send("API is running...");

@@ -15,7 +15,6 @@ export default function RequestBlood() {
   });
 
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,10 +23,9 @@ export default function RequestBlood() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setMessage("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/request-blood", {
+      const res = await fetch("http://localhost:5000/api/bloodreq/request-blood", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -36,7 +34,9 @@ export default function RequestBlood() {
       const data = await res.json();
 
       if (res.ok) {
-        setMessage("✔ Blood request successfully submitted.");
+        alert("Blood request successfully submitted!");
+        window.location.href = "/dashboard";
+
         setFormData({
           patientName: "",
           hospitalName: "",
@@ -47,10 +47,10 @@ export default function RequestBlood() {
           notes: "",
         });
       } else {
-        setMessage("✘ " + (data.message || "Something went wrong"));
+        alert(data.message || "Something went wrong");
       }
     } catch (err) {
-      setMessage("✘ Server error. Try again later.");
+      alert("Server error. Try again later.");
     }
 
     setLoading(false);
@@ -58,9 +58,7 @@ export default function RequestBlood() {
 
   return (
     <Sidebar>
-      {/* MAIN CONTAINER — FULL HEIGHT FLEXBOX */}
       <div className="min-h-screen flex flex-col p-10 w-full items-center">
-
         <div className="transition-all duration-300 flex ml-4 mt-4 mb-6">
           <img src="/logo.png" alt="" className="w-[48px] mt-[2px] h-[48px]" />
           <div className="leading-tight flex flex-col justify-center ml-[5px]">
@@ -69,7 +67,6 @@ export default function RequestBlood() {
           </div>
         </div>
 
-        {/* Page Title */}
         <h1 className="text-[40px] font-bold bg-gradient-to-r from-[#ee0979] to-[#ff6a00] bg-clip-text text-transparent">
           Blood Request Form
         </h1>
@@ -77,22 +74,13 @@ export default function RequestBlood() {
           Provide patient and hospital details to initiate a verified emergency blood request.
         </p>
 
-        {/* FORM CONTAINER */}
         <div className="mt-8 bg-white shadow-xl border border-gray-200 p-10 rounded-2xl w-full max-w-[850px]">
-
-          {/* ALERT BOX */}
-          {message && (
-            <div className="mb-6 p-3 text-center font-semibold rounded-lg bg-blue-50 border border-blue-200 text-blue-700">
-              {message}
-            </div>
-          )}
 
           <form
             onSubmit={handleSubmit}
             className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-[30px]"
           >
 
-            {/* Patient Name */}
             <div>
               <label className="font-semibold text-gray-700">Patient Name</label>
               <div className="flex rounded-md bg-[#EFECEC] p-2 mt-1 text-[#848484]">
@@ -109,7 +97,6 @@ export default function RequestBlood() {
               </div>
             </div>
 
-            {/* Hospital Name */}
             <div>
               <label className="font-semibold text-gray-700">Hospital Name</label>
               <div className="flex rounded-md bg-[#EFECEC] p-2 mt-1 text-[#848484]">
@@ -126,7 +113,6 @@ export default function RequestBlood() {
               </div>
             </div>
 
-            {/* Blood group */}
             <div>
               <label className="font-semibold text-gray-700">Blood Group</label>
               <div className="flex rounded-md bg-[#EFECEC] p-2 text-[#848484]">
@@ -147,7 +133,6 @@ export default function RequestBlood() {
               </div>
             </div>
 
-            {/* Units Needed */}
             <div>
               <label className="font-semibold text-gray-700">Units Required</label>
               <input
@@ -161,7 +146,6 @@ export default function RequestBlood() {
               />
             </div>
 
-            {/* City */}
             <div>
               <label className="font-semibold text-gray-700">City</label>
               <div className="flex rounded-md bg-[#EFECEC] p-2 mt-1 text-[#848484]">
@@ -178,7 +162,6 @@ export default function RequestBlood() {
               </div>
             </div>
 
-            {/* Contact Number */}
             <div>
               <label className="font-semibold text-gray-700">Contact Number</label>
               <div className="flex rounded-md bg-[#EFECEC] p-2 mt-1 text-[#848484]">
@@ -195,7 +178,6 @@ export default function RequestBlood() {
               </div>
             </div>
 
-            {/* Notes */}
             <div className="md:col-span-2">
               <label className="font-semibold text-gray-700">
                 Additional Notes (Optional)
@@ -213,7 +195,6 @@ export default function RequestBlood() {
               </div>
             </div>
 
-            {/* Submit */}
             <div className="md:col-span-2 flex justify-center mt-4">
               <button
                 type="submit"
@@ -223,10 +204,10 @@ export default function RequestBlood() {
                 {loading ? "Submitting..." : "Submit Request"}
               </button>
             </div>
+
           </form>
         </div>
 
-        {/* FOOTER STICKS TO BOTTOM */}
         <div className="w-full mt-[50px]">
           <Footer />
         </div>
