@@ -1,9 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../Components/Sidebar";
 import Footer from "../Components/Footer";
+import { useEffect, useState } from "react";
 
 export default function Dashboard() {
+  const [requests, setRequests] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/bloodreq/blood-requests")
+      .then((res) => res.json())
+      .then((data) => {
+        setRequests(data.slice(0, 4)); // only first 4
+      })
+      .catch((err) => console.log("Error loading requests:", err));
+  }, []);
 
   const benefitsData = [
     {
@@ -31,7 +42,7 @@ export default function Dashboard() {
 
   return (
     <Sidebar>
-      {/* Inject animation styles */}
+      {/* animations */}
       <style>{`
         @keyframes fadeUp {
           0% { opacity: 0; transform: translateY(40px); }
@@ -43,19 +54,20 @@ export default function Dashboard() {
         }
       `}</style>
 
-      {/* Entire content wrapper */}
       <div className="flex-1 flex flex-col w-full">
 
-        {/* LOGO SECTION */}
+        {/* LOGO */}
         <div className="transition-all duration-300 flex ml-4 mt-4">
           <img src="/logo.png" alt="" className="w-[45px] mt-[2px] h-[45px]" />
           <div className="leading-tight flex flex-col justify-center ml-[5px]">
             <h1 className="text-[28px] font-bold">Life Flows</h1>
-            <p className="text-[15px] font-medium text-[#969696]">Together we flow</p>
+            <p className="text-[15px] font-medium text-[#969696]">
+              Together we flow
+            </p>
           </div>
         </div>
 
-        {/* HERO SECTION */}
+        {/* HERO */}
         <div className="relative fade-up-on-scroll w-full h-[calc(100vh-80px)] mt-4 overflow-hidden rounded-[26px]">
           <img
             src="leftsec3.png"
@@ -68,7 +80,8 @@ export default function Dashboard() {
               Welcome to your Dashboard!
             </h1>
             <p className="text-[20px] font-semibold text-gray-200 mt-3 max-w-[700px]">
-              Every action counts toward saving lives. Be the reason someone smiles.
+              Every action counts toward saving lives. Be the reason someone
+              smiles.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mt-6">
@@ -89,6 +102,52 @@ export default function Dashboard() {
           </div>
         </div>
 
+        {/* ================================
+             RECENT BLOOD REQUESTS SECTION
+           ================================ */}
+        <div className="mt-[70px] mb-[50px] px-6 animate-fadeUp">
+          <h1 className="text-[40px] font-bold bg-gradient-to-r from-[#ee0979] to-[#ff6a00] bg-clip-text text-transparent text-center mb-8">
+            Recent Blood Requests
+          </h1>
+
+          {/* CAROUSEL */}
+          <div className="flex overflow-x-auto gap-6 pb-4 no-scrollbar">
+            {requests.length > 0 ? (
+              requests.map((req) => (
+                <div
+                  key={req._id}
+                  className="min-w-[300px] bg-white rounded-2xl shadow-md p-6 border border-gray-200"
+                >
+                  <h2 className="text-xl font-bold text-[#d52d52]">
+                    {req.bloodType} Needed
+                  </h2>
+
+                  <p className="text-gray-700 mt-2">City: {req.city}</p>
+                  <p className="text-gray-700">
+                    Units Required: {req.units || "N/A"}
+                  </p>
+                  <p className="text-gray-700">Urgency: {req.urgency}</p>
+
+                  <p className="text-gray-500 text-sm mt-3">
+                    Requested: {new Date(req.createdAt).toLocaleString()}
+                  </p>
+                </div>
+              ))
+            ) : (
+              <p className="text-gray-500 text-center">No requests found</p>
+            )}
+          </div>
+
+          <div className="text-center mt-6">
+            <button
+              onClick={() => navigate("/all-blood-requests")}
+              className="px-6 py-3 bg-[#d52d52] text-white rounded-full shadow hover:bg-red-600 transition-all"
+            >
+              View More Requests
+            </button>
+          </div>
+        </div>
+
         {/* SECOND SECTION */}
         <div className="flex flex-col md:flex-row justify-center items-center mt-[50px] px-6 animate-fadeUp">
           <div className="w-full md:w-1/2 flex justify-center mb-6 md:mb-0">
@@ -101,6 +160,7 @@ export default function Dashboard() {
             </h1>
             <p className="text-gray-500 leading-[30px]">
               Rather than going to the hospital to donate blood, we bring the hospital to you. We partner with government recognized blood banks who bring their expert doctors and staff to conduct a clean blood donation camp without any hassles. The camp can be organized in a common area or in a blood donation bus which we can bring. We make all the other arrangements, you just have to provide a ventilated clean area.Now saving lives does not need any travel even, just 20minutes at the camp!
+  
             </p>
           </div>
         </div>
@@ -113,6 +173,7 @@ export default function Dashboard() {
             </h1>
             <p className="text-gray-500 leading-[30px]">
               We do not just help you organize a camp, but we also try to ensure each donor feels special. A blood donation camp can be fun with music, it can have a theme, it can motivate people for greater things. We help you do that, right from motivating people before the camp to ensuring each donor feels a sense of pride and happiness post donation.
+      
             </p>
           </div>
 
@@ -121,13 +182,18 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* BENEFITS SECTION */}
+        {/* BENEFITS */}
         <div className="bg-[#F5F5F7] rounded-[30px] p-10 mt-[50px] mb-[30px] text-center animate-fadeUp">
-          <h1 className="text-[40px] text-gray-600 mb-10">Benefits of Blood Donation</h1>
+          <h1 className="text-[40px] text-gray-600 mb-10">
+            Benefits of Blood Donation
+          </h1>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {benefitsData.map((b) => (
-              <div key={b.id} className="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-all">
+              <div
+                key={b.id}
+                className="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-all"
+              >
                 <div className="text-4xl mb-4">{b.logo}</div>
                 <h3 className="text-xl font-bold bg-gradient-to-r from-[#ee0979] to-[#ff6a00] bg-clip-text text-transparent">
                   {b.title}
@@ -138,7 +204,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* FINAL CTA SECTION */}
+        {/* CTA */}
         <div className="text-center mt-[50px] animate-fadeUp">
           <h1 className="text-[60px] bg-gradient-to-r from-[#ee0979] to-[#ff6a00] bg-clip-text text-transparent">
             Book an Appointment
@@ -147,7 +213,10 @@ export default function Dashboard() {
             Organize a blood donation camp in your college, office, or society!
           </p>
 
-          <button onClick={() => navigate("/schedule-donation")} className="mt-[25px] mb-[30px] bg-gray-700 text-white px-6 py-3 rounded-[50px] shadow-lg hover:bg-[#d52d52] transition-all">
+          <button
+            onClick={() => navigate("/schedule-donation")}
+            className="mt-[25px] mb-[30px] bg-gray-700 text-white px-6 py-3 rounded-[50px] shadow-lg hover:bg-[#d52d52] transition-all"
+          >
             Schedule Donation
           </button>
         </div>
