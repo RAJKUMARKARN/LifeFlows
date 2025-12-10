@@ -118,13 +118,14 @@ export default function Dashboard() {
                   key={req._id}
                   className="min-w-[300px] bg-white rounded-2xl shadow-md p-6 border border-gray-200"
                 >
+                  <p className="text-gray-400 font-semibold ">{req.patientName}</p>
                   <h2 className="text-xl font-bold text-[#d52d52]">
                     {req.bloodType} Needed
                   </h2>
 
                   <p className="text-gray-700 mt-2">City: {req.city}</p>
                   <p className="text-gray-700">
-                    Units Required: {req.units || "N/A"}
+                    Units Required: <span className="text-red-500 font-bold">{req.units || "N/A"}</span>
                   </p>
                   <p className="text-gray-700">Urgency: {req.urgency}</p>
 
