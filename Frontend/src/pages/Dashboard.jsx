@@ -8,7 +8,7 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/bloodreq/blood-requests")
+    fetch("https://life-flows-7ily.vercel.app/api/bloodreq/blood-requests")
       .then((res) => res.json())
       .then((data) => {
         setRequests(data.slice(0, 4)); // only first 4

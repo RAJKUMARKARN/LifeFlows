@@ -25,7 +25,7 @@ export default function RequestBlood() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/bloodreq/request-blood", {
+      const res = await fetch("https://life-flows-7ily.vercel.app/api/bloodreq/request-blood", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

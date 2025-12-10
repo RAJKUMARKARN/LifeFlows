@@ -38,7 +38,7 @@ export default function SignUp() {
   }
 
   try {
-    const response = await axios.post("http://localhost:5000/api/auth/register", {
+    const response = await axios.post("https://life-flows-7ily.vercel.app/api/auth/register", {
       name: formData.name,
       email: formData.email,
       password: formData.password,
@@ -180,7 +180,7 @@ export default function SignUp() {
                   console.log("✅ Google User Info:", userInfo);
 
                   // Send token to backend for verification
-                  const res = await axios.post("http://localhost:5000/api/auth/google", { token });
+                  const res = await axios.post("https://life-flows-7ily.vercel.app/api/auth/google", { token });
 
                   // Save JWT and redirect
                   localStorage.setItem("token", res.data.token);

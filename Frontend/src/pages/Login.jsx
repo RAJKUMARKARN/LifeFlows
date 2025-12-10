@@ -46,7 +46,7 @@ export default function Login() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "https://life-flows-7ily.vercel.app/api/auth/login",
         formData
       );
       const elapsed = Date.now() - start;
@@ -77,7 +77,7 @@ export default function Login() {
           const { accessToken, userID } = response.authResponse;
           try {
             const res = await axios.post(
-              "http://localhost:5000/api/auth/facebook",
+              "https://life-flows-7ily.vercel.app/api/auth/facebook",
               { accessToken, userID }
             );
             const elapsed = Date.now() - start;
@@ -222,7 +222,7 @@ export default function Login() {
                 const start = Date.now();
                 try {
                   const token = credentialResponse.credential;
-                  const res = await axios.post("http://localhost:5000/api/auth/google", { token });
+                  const res = await axios.post("https://life-flows-7ily.vercel.app/auth/google", { token });
                   const elapsed = Date.now() - start;
                   if (elapsed < MIN_LOADING_TIME) {
                     await new Promise((r) => setTimeout(r, MIN_LOADING_TIME - elapsed));

@@ -58,7 +58,7 @@ const AppointmentForm = () => {
   e.preventDefault();
 
   try {
-    const res = await fetch("http://localhost:5000/api/schedule_donation", {
+    const res = await fetch("https://life-flows-7ily.vercel.app/api/schedule_donation", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
