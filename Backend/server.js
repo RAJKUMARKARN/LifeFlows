@@ -1,8 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import connectDB from "../config/db.js";
-import authRoutes from "../routes/authRoutes.js"; // optional if you want separate routes
+import connectDB from "./config/db.js";
+import authRoutes from "./routes/authRoutes.js"; // optional if you want separate routes
 import jwt from "jsonwebtoken";
 import axios from "axios";
 import { OAuth2Client } from "google-auth-library";
