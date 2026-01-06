@@ -5,7 +5,7 @@ Hey there,
 It allows users to register, log in securely using JWT authentication, and manage their life-saving journeys.  
 The app is designed with a clean UI, modern animations, and a secure backend.
 
-----
+---
 
 ## 🚀 Features
 
@@ -61,6 +61,7 @@ LifeFlows/
 │ │ ├── App.jsx
 │ │ └── main.jsx
 │ ├── public/
+
 
 
 
