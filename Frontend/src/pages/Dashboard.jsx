@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../Components/Sidebar";
-import Footer from "../Components/Footer";
+import Sidebar from "../components/Sidebar";
+import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 
 export default function Dashboard() {
