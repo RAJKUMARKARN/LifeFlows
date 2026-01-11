@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-export const protect = (req, res, next) => {
+export const protect = (req, res, next) => {console.log("HEADERS RECEIVED:", req.headers); 
   try {
     // Check if there’s a token in the header (e.g. "Authorization: Bearer <token>")
     const authHeader = req.headers.authorization;
