@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Sidebar from "../Components/Sidebar";
-import Footer from "../Components/Footer";
+import Sidebar from "../components/Sidebar";
+import Footer from "../components/Footer";
 import { FiUser, FiPhone, FiMapPin, FiDroplet, FiHome, FiInfo } from "react-icons/fi";
 
 export default function RequestBlood() {

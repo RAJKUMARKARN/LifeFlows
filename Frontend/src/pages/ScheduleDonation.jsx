@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaCalendarAlt, FaMapMarkerAlt, FaHeartbeat, FaSearch } from "react-icons/fa";
 
-import Sidebar from "../Components/Sidebar";
-import Footer from "../Components/Footer";
+import Sidebar from "../components/Sidebar";
+import Footer from "../components/Footer";
 
 /* -------------------------------------------------------
     1. Logo / Header

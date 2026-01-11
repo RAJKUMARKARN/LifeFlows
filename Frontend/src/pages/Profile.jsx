@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import Sidebar from "../components/Sidebar";
-import Badge from "../Components/ Badge"; // ✅ FIXED IMPORT
+import Badge from "../components/ Badge"; // ✅ FIXED IMPORT
 
 // initials helper
 const getInitials = (name = "") =>
