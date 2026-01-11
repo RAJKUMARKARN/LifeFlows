@@ -49,6 +49,9 @@ export default function Login() {
         "https://life-flows-7ily.vercel.app/api/auth/login",
         formData
       );
+       //changed here (1)
+      localStorage.setItem("token", response.data.token);
+
       const elapsed = Date.now() - start;
       if (elapsed < MIN_LOADING_TIME) {
         await new Promise((r) => setTimeout(r, MIN_LOADING_TIME - elapsed));

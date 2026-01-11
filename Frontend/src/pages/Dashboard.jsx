@@ -5,16 +5,46 @@ import { useEffect, useState } from "react";
 
 export default function Dashboard() {
   const [requests, setRequests] = useState([]);
+  const [profileImage, setProfileImage] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     fetch("https://life-flows-7ily.vercel.app/api/bloodreq/blood-requests")
       .then((res) => res.json())
       .then((data) => {
-        setRequests(data.slice(0, 4)); // only first 4
+        setRequests(data.slice(0, 5)); // only first 5 requests
       })
       .catch((err) => console.log("Error loading requests:", err));
   }, []);
+
+      useEffect(() => {
+  const fetchProfile = () => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    fetch("http://localhost:5001/api/users/profile", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setProfileImage(data.profileImage || "");
+      });
+  };
+
+  fetchProfile();
+
+  // 👇 LISTEN FOR IMAGE UPDATES
+  window.addEventListener("profile-updated", fetchProfile);
+
+  return () => {
+    window.removeEventListener("profile-updated", fetchProfile);
+  };
+}, []);
+
+
+
 
 
   
@@ -60,6 +90,8 @@ export default function Dashboard() {
       <div className="flex-1 flex flex-col w-full">
 
         {/* LOGO */}
+
+        <div className="flex justify-between items-center px-6">
         <div className="transition-all duration-300 flex ml-4 mt-4">
           <img src="/logo.png" alt="" className="w-[45px] mt-[2px] h-[45px]" />
           <div className="leading-tight flex flex-col justify-center ml-[5px]">
@@ -68,6 +100,22 @@ export default function Dashboard() {
               Together we flow
             </p>
           </div>
+        </div>
+
+       <div onClick={() => navigate("/profile")}
+              className="cursor-pointer"
+            >
+              <img
+                src={
+                  profileImage
+                    ? `https://life-flows-7ily.vercel.app${profileImage}`
+                    : "/userlogo.png"
+                }
+                alt="Profile"
+                className="w-10 h-10 rounded-full object-cover border-2 border-white"
+              />
+            </div>
+
         </div>
 
         {/* HERO */}
