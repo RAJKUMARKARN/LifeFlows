@@ -16,7 +16,7 @@ The app is designed with a clean UI, modern animations, and a secure backend.
 - 🎥 **Informative Section (Planned)** – Human-centric videos & awareness campaigns about blood donation.
 - 🌗 **Responsive Design** – Optimized for both desktop and mobile users.
 
----
+------
 
 ## 🛠️ Tech Stack
 
@@ -61,6 +61,7 @@ LifeFlows/
 │ │ ├── App.jsx
 │ │ └── main.jsx
 │ ├── public/
+
 
 
 
