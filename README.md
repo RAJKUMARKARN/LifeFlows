@@ -34,7 +34,7 @@ The app is designed with a clean UI, modern animations, and a secure backend.
 - 🗄️ MongoDB (Mongoose ORM)
 - 🌍 CORS (Cross-Origin Resource Sharing)
 
----
+
 
 ## 🧩 Project Structure
 
@@ -61,6 +61,7 @@ LifeFlows/
 │ │ ├── App.jsx
 │ │ └── main.jsx
 │ ├── public/
+
 
 
 
